@@ -46,3 +46,7 @@ class Driver
 
 $track1 = new Driver();
 $track1->set_road("test");
+
+
+$fRoad = fopen("./road.csv", "r") or die("Unable to open file!");
+$makeRoad = fopen("./road.csv", "w") or die("Unable to open file!");
