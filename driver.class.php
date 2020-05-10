@@ -23,30 +23,45 @@ class Driver
   public $road;
   public $car;
 
+
   //Get, set for Road
-  function set_road($road)
+  public function setRoad($road)
   {
     $this->road = $road;
   }
-  function get_road()
+  public function getRoad()
   {
     return $this->road;
   }
 
   //Get, set for car
-  function set_car($car)
+  public function setCar($car)
   {
     $this->car = $car;
   }
-  function get_car()
+  public function getCar()
   {
     return $this->car;
   }
+  //generate map of road
+  public function checkRoad($road)
+  {
+    $map = fopen("map.csv", "a+");
+    $track = $road;
+    $counter = null;
+    foreach ($track as $turns) {
+      if ($turns === "l") {
+        $map[] = $turns;
+        $counter += 1;
+      } else if ($turns === "s") {
+        $map[] = $turns;
+        $counter += 2;
+      } else {
+        $map[] = $turns;
+        $counter += 3;
+      }
+    }
+    $map = $counter;
+    fclose($map);
+  }
 }
-
-$track1 = new Driver();
-$track1->set_road("test");
-
-
-$fRoad = fopen("./road.csv", "r") or die("Unable to open file!");
-$makeRoad = fopen("./road.csv", "w") or die("Unable to open file!");

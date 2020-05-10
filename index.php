@@ -6,6 +6,14 @@ error_reporting(E_ALL);
 
 include_once 'driver.class.php';
 
+$handle = fopen("./road.csv", "r");
+$road = array_map('str_getcsv', file('road.csv'));
+$filename = "./road.csv";
+$track1 = new Driver();
+$track1->setRoad($road);
+$track1->checkRoad($road);
+
+
 
 ?>
 
@@ -21,7 +29,14 @@ include_once 'driver.class.php';
 </head>
 
 <body>
+  <input type="button" value="test" onclick="checkRoad()">
+  <pre>
+  <?php
 
+
+
+  ?>
+</pre>
 </body>
 
 </html>
