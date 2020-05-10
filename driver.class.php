@@ -46,22 +46,41 @@ class Driver
   //generate map of road
   public function checkRoad($road)
   {
-    $map = fopen("map.csv", "a+");
+
+    $map = fopen("map.txt", "w");
+    $tries = fopen("tries.txt", "w");
+    $save = array();
     $track = $road;
-    $counter = null;
+    $c = 0;
+    $print = array();
+
     foreach ($track as $turns) {
       if ($turns === "l") {
-        $map[] = $turns;
-        $counter += 1;
+        $save = $turns;
       } else if ($turns === "s") {
-        $map[] = $turns;
-        $counter += 2;
+        $save = $turns;
       } else {
-        $map[] = $turns;
-        $counter += 3;
+        $save = $turns;
       }
     }
-    $map = $counter;
+
+    foreach ($save as $value) {
+      switch ($value) {
+        case "l":
+          $c += 1;
+          $print[] = "Left";
+          break;
+        case "s":
+          $c += 2;
+          $print[] = "Straight";
+          break;
+        case "r":
+          $c += 3;
+          $print[] = "Right";
+      }
+    }
+    fwrite($map, json_encode($save));
+    fwrite($tries, print_r($c, true));
     fclose($map);
   }
 }
